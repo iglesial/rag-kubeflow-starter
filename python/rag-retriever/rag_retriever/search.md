@@ -106,7 +106,57 @@ DocumentChunk.embedding.cosine_distance(query_vector)
 
 Il faut donc calculer `1 - cosine_distance(...)` et lui donner un `.label("similarity")` pour l'utiliser dans le `WHERE` et le `ORDER BY`.
 
-### Indice 3 — La structure des lignes retournées
+### Indice 3 — Comprendre `select()` en SQLAlchemy (par l'exemple)
+
+**Étape A — SELECT simple**
+
+```sql
+SELECT * FROM document_chunks WHERE document_name = '004-salameche.md';
+```
+
+```python
+from sqlalchemy import select
+from lib_orm.models import DocumentChunk
+
+stmt = select(DocumentChunk).where(DocumentChunk.document_name == "004-salameche.md")
+result = await session.execute(stmt)
+rows = result.scalars().all()  # list[DocumentChunk]
+
+for chunk in rows:
+    print(chunk.content)
+```
+
+**Étape B — SELECT avec une colonne calculée**
+
+```sql
+SELECT *, length(content) AS content_length
+FROM document_chunks
+ORDER BY content_length DESC
+LIMIT 3;
+```
+
+```python
+from sqlalchemy import func, select
+
+content_length = func.length(DocumentChunk.content).label("content_length")
+
+stmt = (
+    select(DocumentChunk, content_length)
+    .order_by(content_length.desc())
+    .limit(3)
+)
+result = await session.execute(stmt)
+rows = result.all()
+
+for row in rows:
+    print(row.DocumentChunk.document_name, row.content_length)
+    #      ^^^^^^^^^^^^^^^^^^              ^^^^^^^^^^^^^^^^^^
+    #      l'objet ORM                     la colonne calculée
+```
+
+Point important : avec `select(DocumentChunk)` seul, on obtient des objets ORM directement. Avec `select(DocumentChunk, content_length)` — deux choses dans le select — chaque ligne devient un tuple nommé avec `.DocumentChunk` et `.content_length`.
+
+### Indice 4 — La structure des lignes retournées
 
 `await session.execute(stmt)` retourne un objet Result. Appelez `.all()` pour obtenir la liste des lignes.
 
