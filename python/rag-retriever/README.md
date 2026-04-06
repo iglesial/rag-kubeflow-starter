@@ -27,7 +27,7 @@ FastAPI retrieval service for the RAG system. Provides a REST API for semantic s
 ## Running
 
 ```bash
-python -m rag_retriever.main
+uv run main --host 0.0.0.0 --port 8000 --db_url "postgresql+asyncpg://rag:rag@localhost:5432/rag" --embedding_model all-MiniLM-L6-v2 --top_k 5
 ```
 
 Runs as a containerized service (`Dockerfile` included), designed for Kubernetes deployment with health/readiness probes.

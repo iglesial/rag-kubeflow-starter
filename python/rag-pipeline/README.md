@@ -28,7 +28,7 @@ Kubeflow Pipeline definitions for the RAG system. Orchestrates the ingestion wor
 ## Running
 
 ```bash
-python -m rag_pipeline.main
+uv run main --pipeline_name rag-ingestion --input_dir data/documents --kubeflow_host "http://localhost:8080" --compile_only true
 ```
 
 This compiles the pipeline YAML and optionally submits it to a Kubeflow cluster.

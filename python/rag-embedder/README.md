@@ -20,7 +20,7 @@ Batch embedding and storage component for the RAG system. Takes chunked document
 ## Running
 
 ```bash
-python -m rag_embedder.main
+uv run main --input_dir data/chunks --output_dir data/embeddings --db_url "postgresql+asyncpg://rag:rag@localhost:5432/rag" --embedding_model all-MiniLM-L6-v2 --batch_size 32
 ```
 
 Runs as a containerized Kubeflow pipeline component (`Dockerfile` included).

@@ -14,6 +14,12 @@ Database and ORM library for the RAG system. Provides async PostgreSQL access wi
 - pgvector column for cosine similarity search
 - Unique constraint on `(document_name, chunk_index)` pairs
 
+## Running
+
+```bash
+uv run main --db_url "postgresql+asyncpg://rag:rag@localhost:5432/rag"
+```
+
 ## Dependencies
 
 - `sqlalchemy[asyncio]` — async ORM

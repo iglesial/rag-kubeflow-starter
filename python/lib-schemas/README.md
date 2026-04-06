@@ -13,6 +13,12 @@ Shared Pydantic schemas for data exchange between RAG system components.
 | **SearchResponse** | Full API response with results and timing info |
 | **StatsResponse** | Database statistics (total documents, chunks, dimension, model name) |
 
+## Running
+
+```bash
+uv run main
+```
+
 ## Dependencies
 
 - `pydantic` — data validation

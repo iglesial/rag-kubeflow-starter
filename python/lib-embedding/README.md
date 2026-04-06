@@ -9,6 +9,12 @@ Embedding client library for the RAG system. Wraps [sentence-transformers](https
 
 Default model: `all-MiniLM-L6-v2` (384-dimensional vectors).
 
+## Running
+
+```bash
+uv run main --embedding_model all-MiniLM-L6-v2 --vector_dim 384
+```
+
 ## Usage
 
 ```python

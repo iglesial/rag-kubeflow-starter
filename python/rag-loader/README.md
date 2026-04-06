@@ -19,7 +19,7 @@ Document reader and chunker for the RAG system. First step in the ingestion pipe
 ## Running
 
 ```bash
-python -m rag_loader.main
+uv run main --input_dir data/documents --output_dir data/chunks --chunk_size 512 --chunk_overlap 64
 ```
 
 Runs as a containerized Kubeflow pipeline component (`Dockerfile` included).
