@@ -1,0 +1,37 @@
+name: Test rag-retriever
+
+on:
+  push:
+    paths:
+      - "python/rag-retriever/**"
+      - "python/lib-embedding/**"
+      - "python/lib-orm/**"
+      - "python/lib-schemas/**"
+  pull_request:
+    paths:
+      - "python/rag-retriever/**"
+      - "python/lib-embedding/**"
+      - "python/lib-orm/**"
+      - "python/lib-schemas/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python/rag-retriever
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv sync --group dev
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --files python/rag-retriever/**/*
+
+      - name: Run tests
+        run: uv run pytest

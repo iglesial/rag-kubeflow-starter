@@ -23,11 +23,11 @@ class TaskInputs(BaseSettings):
     model_config = SettingsConfigDict(cli_parse_args=True, cli_ignore_unknown_args=True)
 
     input_dir: str = Field(
-        default="data/documents",
+        default="../../data/documents",
         description="Directory containing input documents to process",
     )
     output_dir: str = Field(
-        default="data/chunks",
+        default="../../data/chunks",
         description="Directory to write chunked output JSON files",
     )
     chunk_size: int = Field(
