@@ -1,7 +1,5 @@
 """Document reader module for rag-loader."""
 
-from pathlib import Path
-
 SUPPORTED_EXTENSIONS = {".txt", ".md"}
 
 

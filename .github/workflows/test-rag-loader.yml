@@ -24,10 +24,13 @@ jobs:
       - name: Install dependencies
         run: uv sync --group dev
 
+      - name: Install pre-commit
+        run: pip install pre-commit
+        working-directory: ${{ github.workspace }}
+
       - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --files python/rag-loader/**/*
+        run: pre-commit run --files $(git ls-files 'python/rag-loader/')
+        working-directory: ${{ github.workspace }}
 
       - name: Run tests
         run: uv run pytest
