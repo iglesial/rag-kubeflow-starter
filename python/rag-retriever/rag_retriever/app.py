@@ -1,13 +1,28 @@
 """Application module for rag-retriever."""
 
+import uvicorn
+
+from rag_retriever.task_inputs import task_inputs
+
 
 class App:
-    """RAG retriever API application."""
+    """FastAPI retrieval service application."""
 
     def run(self) -> None:
         """
-        Run the retriever API server.
+        Run the retrieval API server.
 
-        Start uvicorn with the FastAPI app factory.
+        Starts a uvicorn server with the FastAPI application on the
+        configured host and port.
         """
-        raise NotImplementedError  # TODO: implement
+        print(f"Host:            {task_inputs.host}")
+        print(f"Port:            {task_inputs.port}")
+        print(f"Database URL:    {task_inputs.db_url}")
+        print(f"Embedding model: {task_inputs.embedding_model}")
+        print(f"Default top_k:   {task_inputs.top_k}")
+        uvicorn.run(
+            "rag_retriever.api:create_app",
+            host=task_inputs.host,
+            port=task_inputs.port,
+            factory=True,
+        )

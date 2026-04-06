@@ -40,10 +40,7 @@ class EmbeddingClient:
         list[list[float]]
             List of embedding vectors.
         """
-        if not texts:
-            return []
-        embeddings = self._model.encode(texts, batch_size=batch_size)
-        return [vec.tolist() for vec in embeddings]
+        raise NotImplementedError  # TODO: implement
 
     @property
     def dimension(self) -> int:

@@ -1,25 +1,19 @@
-name: Test rag-embedder
+name: Test lib-embedding
 
 on:
   push:
     paths:
-      - "python/rag-embedder/**"
       - "python/lib-embedding/**"
-      - "python/lib-orm/**"
-      - "python/lib-schemas/**"
   pull_request:
     paths:
-      - "python/rag-embedder/**"
       - "python/lib-embedding/**"
-      - "python/lib-orm/**"
-      - "python/lib-schemas/**"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: python/rag-embedder
+        working-directory: python/lib-embedding
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +27,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Run pre-commit
-        run: pre-commit run --files $(git ls-files 'python/rag-embedder/')
+        run: pre-commit run --files $(git ls-files 'python/lib-embedding/')
         working-directory: ${{ github.workspace }}
 
       - name: Run tests
