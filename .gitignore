@@ -17,6 +17,7 @@ htmlcov/
 
 # Data artifacts
 data/chunks/
+data/embeddings/
 
 # IDE
 .vscode/

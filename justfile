@@ -134,7 +134,7 @@ serve:
 
 # Query the RAG retriever with a question
 query question:
-    Invoke-RestMethod -Method Post -Uri "http://localhost:8000/search" -ContentType "application/json" -Body (@{query="{{question}}"; top_k=5} | ConvertTo-Json) -o ./data/queries/{{question}}.json
+    Invoke-RestMethod -Method Post -Uri "http://localhost:8000/search" -ContentType "application/json" -Body (@{query='{{question}}'; top_k=5} | ConvertTo-Json) -o './data/queries/{{question}}.json'
 
 # --- Testing ---
 
